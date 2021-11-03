@@ -66,7 +66,8 @@ public class Client {
     private void getInfoFromServer(DataInputStream input) throws IOException {
         if (input.available() > 0) {
             String messageFromServer = input.readUTF();
-            System.out.println(messageFromServer);
+            PrintStream ps = new PrintStream(System.out, true, "UTF-8");
+            ps.println(messageFromServer);
         }
     }
 
