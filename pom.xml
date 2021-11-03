@@ -26,7 +26,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>main.com.db.edu.proxy.client.ClientProxy</mainClass>
+                            <mainClass>com.db.edu.proxy.client.ClientProxy</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -45,7 +45,7 @@
                             <archive>
                                 <manifest>
                                     <addClasspath>true</addClasspath>
-                                    <mainClass>main.com.db.edu.proxy.client.ClientProxy</mainClass>
+                                    <mainClass>com.db.edu.proxy.client.ClientProxy</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
@@ -64,7 +64,7 @@
                             <archive>
                                 <manifest>
                                     <addClasspath>true</addClasspath>
-                                    <mainClass>main.com.db.edu.proxy.server.ServerProxy</mainClass>
+                                    <mainClass>com.db.edu.proxy.server.ServerProxy</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
@@ -139,10 +139,10 @@
                 </dependencies>
                 <configuration>
                     <targetClasses>
-                        <param>com.acme.edu.*</param>
+                        <param>com.db.edu.*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>integration.*</param>
+                        <param>com.db.edu.*</param>
                     </targetTests>
                     <verbose>true</verbose>
                 </configuration>

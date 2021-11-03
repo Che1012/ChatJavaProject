@@ -1,4 +1,4 @@
-package main.com.db.edu.message;
+package com.db.edu.message;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

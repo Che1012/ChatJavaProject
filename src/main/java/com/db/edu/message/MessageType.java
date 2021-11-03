@@ -1,4 +1,4 @@
-package main.com.db.edu.message;
+package com.db.edu.message;
 
 public enum MessageType {
     SEND("/snd"),

@@ -1,7 +1,7 @@
-package main.com.db.edu.proxy.server;
+package com.db.edu.proxy.server;
 
-import main.com.db.edu.SocketHolder;
-import main.com.db.edu.proxy.server.user.User;
+import com.db.edu.SocketHolder;
+import com.db.edu.proxy.server.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
