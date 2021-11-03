@@ -7,27 +7,19 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ForClientThread extends Thread {
-    final Logger logger = LoggerFactory.getLogger(ForClientThread.class);
+    private final Logger logger = LoggerFactory.getLogger(ForClientThread.class);
 
     private final User user;
-    private final ArrayList<Room> rooms;
+    private final List<Room> rooms;
     private Room room;
 
-    public ForClientThread(User user, ArrayList<Room> rooms) {
+    public ForClientThread(User user, List<Room> rooms) {
         this.user = user;
         this.rooms = rooms;
         this.room = getRoomById("MainRoom", rooms);
-    }
-
-    private Room getRoomById(String id, ArrayList<Room> rooms) {
-        for (Room room : rooms) {
-            if (id.trim().equals(room.getId().trim())) {
-                return room;
-            }
-        }
-        return room;
     }
 
     public void run() {
@@ -41,6 +33,15 @@ public class ForClientThread extends Thread {
         } finally {
             user.close();
         }
+    }
+
+    private Room getRoomById(String id, List<Room> rooms) {
+        for (Room room : rooms) {
+            if (id.trim().equals(room.getId().trim())) {
+                return room;
+            }
+        }
+        return room;
     }
 
     private void workWithMessage() throws IOException {
@@ -68,7 +69,7 @@ public class ForClientThread extends Thread {
         return user.getReceivedLine();
     }
 
-    private User searchInRoomsByName(String name, ArrayList<Room> rooms) {
+    private User searchInRoomsByName(String name, List<Room> rooms) {
         for (Room room : rooms) {
             if (room.getUserList().findUserByName(name) != null) {
                 return user;
