@@ -38,6 +38,8 @@ public class ForClientThread extends Thread {
             }
         } catch (IOException e) {
             logger.error("Can't connect to user;s output and input");
+        } finally {
+            user.close();
         }
     }
 
