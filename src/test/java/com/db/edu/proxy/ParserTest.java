@@ -11,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
-    MessageParser parser =  new MessageParser();
-    String clientMessage = "";
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final PrintStream stream = new PrintStream(outContent);
+    private MessageParser parser =  new MessageParser();
+    private String clientMessage = "";
+    private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private PrintStream stream = new PrintStream(outContent);
 
     @Test
     public void baseMessageSent() {
