@@ -1,4 +1,4 @@
-package test.com.db.edu.proxy.client;
+package com.db.edu.proxy.client;
 
 import org.junit.jupiter.api.Test;
 

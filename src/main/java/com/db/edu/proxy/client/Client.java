@@ -1,9 +1,9 @@
-package main.com.db.edu.proxy.client;
+package com.db.edu.proxy.client;
 
 
-import main.com.db.edu.SocketHolder;
-import main.com.db.edu.message.MessageType;
-import main.com.db.edu.parser.MessageParser;
+import com.db.edu.SocketHolder;
+import com.db.edu.message.MessageType;
+import com.db.edu.parser.MessageParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -12,7 +12,8 @@
     </properties>
 
     <build>
-        <sourceDirectory>src</sourceDirectory>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -26,7 +27,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>main.com.db.edu.proxy.client.ClientProxy</mainClass>
+                            <mainClass>com.db.edu.proxy.client.ClientProxy</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -45,7 +46,7 @@
                             <archive>
                                 <manifest>
                                     <addClasspath>true</addClasspath>
-                                    <mainClass>main.com.db.edu.proxy.client.ClientProxy</mainClass>
+                                    <mainClass>com.db.edu.proxy.client.ClientProxy</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
@@ -64,7 +65,7 @@
                             <archive>
                                 <manifest>
                                     <addClasspath>true</addClasspath>
-                                    <mainClass>main.com.db.edu.proxy.server.ServerProxy</mainClass>
+                                    <mainClass>com.db.edu.proxy.server.ServerProxy</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
@@ -139,10 +140,10 @@
                 </dependencies>
                 <configuration>
                     <targetClasses>
-                        <param>com.acme.edu.*</param>
+                        <param>com.db.edu.*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>integration.*</param>
+                        <param>com.db.edu.*</param>
                     </targetTests>
                     <verbose>true</verbose>
                 </configuration>
@@ -169,19 +170,31 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.8.1</version>
-            <scope>compile</scope>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.8.1</version>
-            <scope>compile</scope>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>3.21.0</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easytesting</groupId>
+            <artifactId>fest-assert</artifactId>
+            <version>1.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easytesting</groupId>
+            <artifactId>fest-assert</artifactId>
+            <version>1.4</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>

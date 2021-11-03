@@ -1,9 +1,9 @@
-package main.com.db.edu.proxy.server;
+package com.db.edu.proxy.server;
 
-import main.com.db.edu.message.MessageKeeper;
-import main.com.db.edu.message.StringMessage;
-import main.com.db.edu.proxy.server.user.User;
-import main.com.db.edu.proxy.server.user.UserList;
+import com.db.edu.message.MessageKeeper;
+import com.db.edu.message.StringMessage;
+import com.db.edu.proxy.server.user.User;
+import com.db.edu.proxy.server.user.UserList;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

@@ -1,7 +1,7 @@
-package main.com.db.edu.proxy.server;
+package com.db.edu.proxy.server;
 
-import main.com.db.edu.message.StringMessage;
-import main.com.db.edu.proxy.server.user.User;
+import com.db.edu.message.StringMessage;
+import com.db.edu.proxy.server.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +36,6 @@ public class ForClientThread extends Thread {
                 workWithMessage();
                 user.connectOut().flush();
             }
-
         } catch (IOException e) {
             logger.error("Can't connect to user;s output and input");
         } finally {
