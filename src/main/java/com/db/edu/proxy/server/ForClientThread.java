@@ -7,34 +7,26 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ForClientThread extends Thread {
-    final Logger logger = LoggerFactory.getLogger(ForClientThread.class);
+    private final Logger logger = LoggerFactory.getLogger(ForClientThread.class);
 
     private final User user;
-    private final ArrayList<Room> rooms;
+    private final List<Room> rooms;
     private Room room;
 
-    public ForClientThread(User user, ArrayList<Room> rooms) {
+    public ForClientThread(User user, List<Room> rooms) {
         this.user = user;
         this.rooms = rooms;
         this.room = getRoomById("MainRoom", rooms);
-    }
-
-    private Room getRoomById(String id, ArrayList<Room> rooms) {
-        for (Room room : rooms) {
-            if (id.trim().equals(room.getId().trim())) {
-                return room;
-            }
-        }
-        return room;
     }
 
     public void run() {
         try {
             while (true) {
                 workWithMessage();
-                user.connectOut().flush();
+                user.flush();
             }
         } catch (IOException e) {
             logger.error("Can't connect to user;s output and input");
@@ -44,8 +36,17 @@ public class ForClientThread extends Thread {
         }
     }
 
+    private Room getRoomById(String id, List<Room> rooms) {
+        for (Room room : rooms) {
+            if (id.trim().equals(room.getId().trim())) {
+                return room;
+            }
+        }
+        return room;
+    }
+
     private void workWithMessage() throws IOException {
-        String receivedLine = user.connectIn().readUTF();
+        String receivedLine = getReceivedLine();
         switch (receivedLine) {
             case "/hist":
                 room.printHistory(user.connectOut());
@@ -65,7 +66,11 @@ public class ForClientThread extends Thread {
         }
     }
 
-    private User searchInRoomsByName(String name, ArrayList<Room> rooms) {
+    private String getReceivedLine() throws IOException {
+        return user.getReceivedLine();
+    }
+
+    private User searchInRoomsByName(String name, List<Room> rooms) {
         for (Room room : rooms) {
             if (room.getUserList().findUserByName(name) != null) {
                 return user;
@@ -75,7 +80,7 @@ public class ForClientThread extends Thread {
     }
 
     private void rename() throws IOException {
-        String newName = user.connectIn().readUTF();
+        String newName = getReceivedLine();
         User userWithThisName = searchInRoomsByName(newName, rooms);
         if (userWithThisName == null) {
             user.setId(newName);
@@ -86,8 +91,8 @@ public class ForClientThread extends Thread {
     }
 
     private void sendPrivateMessage() throws IOException {
-        String receiverName = user.connectIn().readUTF();
-        String messageToReceive = user.connectIn().readUTF();
+        String receiverName = getReceivedLine();
+        String messageToReceive = getReceivedLine();
         User receiver = room.getUserList().findUserByName(receiverName);
         if (receiver == null) {
             user.connectOut().writeUTF("Incorrect username");
@@ -99,7 +104,7 @@ public class ForClientThread extends Thread {
     }
 
     private void changeRoom() throws IOException {
-        String newRoom = user.connectIn().readUTF();
+        String newRoom = getReceivedLine();
         room.removeUser(user);
         room = getRoomById(newRoom, rooms);
         room.addUser(user);

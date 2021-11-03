@@ -50,4 +50,12 @@ public class User {
             logger.error("User has no initialized streams or socket to close");
         }
     }
+
+    public void flush() throws IOException {
+        out.flush();
+    }
+
+    public String getReceivedLine() throws IOException {
+        return connectIn().readUTF();
+    }
 }
