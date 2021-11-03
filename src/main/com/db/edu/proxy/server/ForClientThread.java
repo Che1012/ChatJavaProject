@@ -36,7 +36,6 @@ public class ForClientThread extends Thread {
                 workWithMessage();
                 user.connectOut().flush();
             }
-
         } catch (IOException e) {
             logger.error("Can't connect to user;s output and input");
         }
