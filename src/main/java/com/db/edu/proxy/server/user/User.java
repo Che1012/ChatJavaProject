@@ -1,9 +1,14 @@
 package com.db.edu.proxy.server.user;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.net.Socket;
 
 public class User {
+    final Logger logger = LoggerFactory.getLogger(User.class);
+
     private final Socket socket;
     private String id;
     private final DataOutputStream out;
@@ -42,6 +47,7 @@ public class User {
             in.close();
             socket.close();
         } catch (IOException e) {
+            logger.error("User has no initialized streams or socket to close");
             e.printStackTrace();
         }
     }

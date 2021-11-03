@@ -3,14 +3,17 @@ package com.db.edu.proxy.server.user;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static java.lang.System.lineSeparator;
 
 public class UserList {
-    private final ArrayList<User> users;
+
+    private final List<User> users;
 
     public UserList() {
-        this.users = new ArrayList<>();
+        this.users = Collections.synchronizedList(new ArrayList<>());
     }
 
     public void addUser(User user) {
