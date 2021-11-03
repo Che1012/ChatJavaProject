@@ -1,6 +1,6 @@
-package main.com.db.edu.parser;
+package com.db.edu.parser;
 
-import main.com.db.edu.message.MessageType;
+import com.db.edu.message.MessageType;
 
 import java.util.Objects;
 

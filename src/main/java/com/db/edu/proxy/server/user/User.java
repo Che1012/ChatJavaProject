@@ -1,4 +1,4 @@
-package main.com.db.edu.proxy.server.user;
+package com.db.edu.proxy.server.user;
 
 import java.io.*;
 import java.net.Socket;

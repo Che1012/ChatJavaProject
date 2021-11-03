@@ -1,6 +1,6 @@
-package main.com.db.edu.message;
+package com.db.edu.message;
 
-import main.com.db.edu.proxy.server.user.User;
+import com.db.edu.proxy.server.user.User;
 
 import java.time.LocalTime;
 

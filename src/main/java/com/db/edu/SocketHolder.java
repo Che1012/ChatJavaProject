@@ -1,4 +1,4 @@
-package main.com.db.edu;
+package com.db.edu;
 
 public class SocketHolder {
     public static String getAddress() {
