@@ -17,17 +17,20 @@ public class Client {
     private final Logger logger = LoggerFactory.getLogger(Client.class);
     private final BufferedReader reader;
     private String name;
+    private PrintStream printStream;
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public Client() throws UnsupportedEncodingException {
+    public Client(PrintStream printStream) throws UnsupportedEncodingException {
+        this.printStream = printStream;
         this.reader = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
     }
 
-    public Client(BufferedReader reader) {
+    public Client(BufferedReader reader, PrintStream printStream) {
         this.reader = reader;
+        this.printStream = printStream;
     }
 
     public void run() {
@@ -42,9 +45,12 @@ public class Client {
             socket.setSoTimeout(3000);
 
             while (true) {
-                readClientMessage(reader, out, parser);
+                String clientMessage = readClientMessage(reader, parser);
+                if (clientMessage != null) {
+                    out.writeUTF(clientMessage);
+                    out.flush();
+                }
                 getInfoFromServer(input);
-//                checkAvailability(out, input);
             }
 
         } catch (IOException e) {
@@ -53,25 +59,14 @@ public class Client {
         }
     }
 
-    private void checkAvailability(DataOutputStream out, DataInputStream input) throws IOException {
-        out.writeUTF(MessageType.CHECK.getType());
-        out.flush();
-        if ((input.available() > 0 && !Objects.equals(input.readUTF(), MessageType.CHECK.getType()))
-                || input.available() < 0) {
-            System.out.println("Sorry, server is not available\n");
-            throw new IllegalArgumentException("Cannot connect to server");
-        }
-    }
-
-    private void getInfoFromServer(DataInputStream input) throws IOException {
+    protected void getInfoFromServer(DataInputStream input) throws IOException {
         if (input.available() > 0) {
             String messageFromServer = input.readUTF();
-            PrintStream ps = new PrintStream(System.out, true, "UTF-8");
-            ps.println(messageFromServer);
+            printStream.println(messageFromServer);
         }
     }
 
-    private void readClientMessage(BufferedReader reader, DataOutputStream out, MessageParser parser)
+    protected String readClientMessage(BufferedReader reader, MessageParser parser)
             throws IOException {
         String clientMessage = "";
         if (reader.ready()) {
@@ -79,14 +74,21 @@ public class Client {
         }
         if (clientMessage != null && !clientMessage.isEmpty()) {
             try {
-                clientMessage = parser.parse(clientMessage);
-                clientMessage = sendMessageSeparately(out, clientMessage);
-                out.writeUTF(clientMessage);
-                out.flush();
+                return parser.parse(clientMessage);
             } catch (IllegalArgumentException e) {
                 logger.error("Client input is incorrect: " + clientMessage);
                 System.out.println(e.getMessage());
             }
+        }
+        return null;
+    }
+    private void checkAvailability(DataOutputStream out, DataInputStream input) throws IOException {
+        out.writeUTF(MessageType.CHECK.getType());
+        out.flush();
+        if ((input.available() > 0 && !Objects.equals(input.readUTF(), MessageType.CHECK.getType()))
+                || input.available() < 0) {
+            System.out.println("Sorry, server is not available\n");
+            throw new IllegalArgumentException("Cannot connect to server");
         }
     }
 

@@ -51,7 +51,7 @@ public class User {
         }
     }
 
-    public void flush() throws IOException {
+    public void flushOut() throws IOException {
         out.flush();
     }
 
