@@ -21,13 +21,6 @@ public class ServerProxy {
         rooms.add(new Room("MainRoom"));
         rooms.add(new Room("OtherRoom"));
 
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.execute(() -> {
-            while (true) {
-                cleanRooms(rooms);
-            }
-        });
-
         try (ServerSocket serverSocket = new ServerSocket(SocketHolder.getPort())) {
             while (true) {
                 try {
@@ -40,8 +33,6 @@ public class ServerProxy {
                     }
                 } catch (IOException e) {
                     logger.error("No users");
-                } finally {
-                    executorService.shutdownNow();
                 }
             }
         } catch (IOException e) {
