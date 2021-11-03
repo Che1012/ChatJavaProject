@@ -1,13 +1,9 @@
 package com.db.edu.proxy.server;
 
-import com.db.edu.proxy.server.ForClientThread;
-import com.db.edu.proxy.server.Room;
 import com.db.edu.proxy.server.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +22,11 @@ public class ForClientThreadTest {
     public void setUp() throws IOException {
         user = mock(User.class);
         room = mock(Room.class);
-        when(room.getId()).thenReturn("MainRoom");
-        doThrow(new IOException()).when(user).flush();
-
-        ArrayList<Room> rooms = new ArrayList<>();
+        List<Room> rooms = new ArrayList<>();
         rooms.add(room);
+
+        when(room.getId()).thenReturn("MainRoom");
+        doThrow(new IOException()).when(user).flushOut();
 
         forClientThreadSut = new ForClientThread(user, rooms);
     }
@@ -40,6 +36,7 @@ public class ForClientThreadTest {
         when(user.getReceivedLine()).thenReturn("message");
 
         forClientThreadSut.run();
+
         verify(room).sendToEveryone(any());
     }
 }

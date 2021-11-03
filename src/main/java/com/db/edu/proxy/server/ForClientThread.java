@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ForClientThread extends Thread {
@@ -26,7 +25,7 @@ public class ForClientThread extends Thread {
         try {
             while (true) {
                 workWithMessage();
-                user.flush();
+                user.flushOut();
             }
         } catch (IOException e) {
             logger.error("Can't connect to user;s output and input");

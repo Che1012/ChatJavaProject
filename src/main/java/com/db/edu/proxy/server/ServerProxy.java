@@ -9,15 +9,15 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.List;
+
 
 public class ServerProxy {
 
     public static void main(String[] args) {
         final Logger logger = LoggerFactory.getLogger(ServerProxy.class);
 
-        ArrayList<Room> rooms = new ArrayList<>();
+        List<Room> rooms = new ArrayList<>();
         rooms.add(new Room("MainRoom"));
         rooms.add(new Room("OtherRoom"));
 
@@ -40,7 +40,7 @@ public class ServerProxy {
         }
     }
 
-    private static void cleanRooms(ArrayList<Room> rooms) {
+    private static void cleanRooms(List<Room> rooms) {
         for (Room room : rooms) {
             room.clean();
         }
