@@ -48,7 +48,6 @@ public class User {
             socket.close();
         } catch (IOException e) {
             logger.error("User has no initialized streams or socket to close");
-            e.printStackTrace();
         }
     }
 }
