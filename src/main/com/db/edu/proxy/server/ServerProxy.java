@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ServerProxy {
 
@@ -18,6 +20,13 @@ public class ServerProxy {
         ArrayList<Room> rooms = new ArrayList<>();
         rooms.add(new Room("MainRoom"));
         rooms.add(new Room("OtherRoom"));
+
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() -> {
+            while (true) {
+                cleanRooms(rooms);
+            }
+        });
 
         try (ServerSocket serverSocket = new ServerSocket(SocketHolder.getPort())) {
             while (true) {
@@ -29,9 +38,10 @@ public class ServerProxy {
                         rooms.get(0).addUser(user);
                         new ForClientThread(user, rooms).start();
                     }
-                    cleanRooms(rooms);
                 } catch (IOException e) {
                     logger.error("No users");
+                } finally {
+                    executorService.shutdownNow();
                 }
             }
         } catch (IOException e) {

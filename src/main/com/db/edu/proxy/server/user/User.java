@@ -35,4 +35,14 @@ public class User {
     public boolean isClosed() {
         return socket.isClosed() || !socket.isConnected();
     }
+
+    public void close() {
+        try {
+            out.close();
+            in.close();
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
