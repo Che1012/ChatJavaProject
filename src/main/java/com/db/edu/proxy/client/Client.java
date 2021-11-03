@@ -44,7 +44,7 @@ public class Client {
             MessageParser parser = new MessageParser();
             socket.setSoTimeout(3000);
 
-            while (true) {
+            while (!Thread.currentThread().isInterrupted()) {
                 String clientMessage = readClientMessage(reader, parser);
                 if (clientMessage != null) {
                     out.writeUTF(clientMessage);

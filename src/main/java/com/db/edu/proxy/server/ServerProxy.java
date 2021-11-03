@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -17,7 +18,7 @@ public class ServerProxy {
     public static void main(String[] args) {
         final Logger logger = LoggerFactory.getLogger(ServerProxy.class);
 
-        List<Room> rooms = new ArrayList<>();
+        List<Room> rooms = new LinkedList<>();
         rooms.add(new Room("MainRoom"));
         rooms.add(new Room("OtherRoom"));
 
