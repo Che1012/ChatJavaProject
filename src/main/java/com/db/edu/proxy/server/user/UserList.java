@@ -3,7 +3,7 @@ package com.db.edu.proxy.server.user;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-
+import com.db.edu.proxy.server.user.User;
 import static java.lang.System.lineSeparator;
 
 public class UserList {

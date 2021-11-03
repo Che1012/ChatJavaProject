@@ -26,7 +26,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>main.com.db.edu.proxy.client.ClientProxy</mainClass>
+                            <mainClass>main.main.java.com.db.edu.proxy.client.ClientProxy</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -46,7 +46,7 @@
                             <archive>
                                 <manifest>
                                     <addClasspath>true</addClasspath>
-                                    <mainClass>com.db.edu.proxy.client.ClientProxy</mainClass>
+                                    <mainClass>main.java.com.db.edu.proxy.client.ClientProxy</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
@@ -65,7 +65,7 @@
                             <archive>
                                 <manifest>
                                     <addClasspath>true</addClasspath>
-                                    <mainClass>com.db.edu.proxy.server.ServerProxy</mainClass>
+                                    <mainClass>main.java.com.db.edu.proxy.server.ServerProxy</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>

@@ -1,12 +1,10 @@
 package com.db.edu.proxy.client;
 
-import com.db.edu.proxy.client.Client;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import static org.fest.assertions.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
